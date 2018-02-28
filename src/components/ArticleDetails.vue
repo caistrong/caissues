@@ -1,5 +1,5 @@
 <template>
-  <div v-html="body"></div>
+  <div class="article-detail-wrap" v-html="body"></div>
 </template>
 <script>
 import GithubApi from '../utils/githubApi.js'
@@ -17,8 +17,15 @@ export default {
   async created () {
     let number = this.$route.params.id
     let res = await GithubApi.getIssue(number)
-    this.article = res.data
-    this.body = marked(res.data.body)
+    this.article = res
+    this.body = marked(res.body)
   }
 }
 </script>
+<style lang="stylus" scoped>
+.article-detail-wrap
+  width 80%
+  margin 0 auto
+  background #EEEEEE
+  padding 1rem 2rem
+</style>
